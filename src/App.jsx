@@ -2,16 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import { useGestures } from './useGestures';
 
 const slides = [
-  '/slides/slide1.svg',
-  '/slides/slide2.svg',
-  '/slides/slide3.svg',
-  '/slides/slide4.svg',
-  '/slides/slide5.svg',
-  '/slides/slide6.svg',
-  '/slides/slide7.svg',
-  '/slides/slide8.svg',
-  '/slides/slide9.svg',
-  '/slides/slide10.svg'
+  './slides/slide1.svg',
+  './slides/slide2.svg',
+  './slides/slide3.svg',
+  './slides/slide4.svg',
+  './slides/slide5.svg',
+  './slides/slide6.svg',
+  './slides/slide7.svg',
+  './slides/slide8.svg',
+  './slides/slide9.svg',
+  './slides/slide10.svg'
 ];
 
 function App() {

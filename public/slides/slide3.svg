@@ -1,0 +1,18 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#7c3aed"/>
+  <text x="640" y="250" font-family="Arial, sans-serif" font-size="64" fill="white" text-anchor="middle" font-weight="bold">
+    🎤 Voice Commands
+  </text>
+  <text x="640" y="360" font-family="Arial, sans-serif" font-size="40" fill="#ede9fe" text-anchor="middle">
+    Say "next" → Next Slide
+  </text>
+  <text x="640" y="440" font-family="Arial, sans-serif" font-size="40" fill="#ede9fe" text-anchor="middle">
+    Say "back" → Previous Slide
+  </text>
+  <text x="640" y="550" font-family="Arial, sans-serif" font-size="32" fill="#ddd6fe" text-anchor="middle">
+    Using Web Speech API
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 3
+  </text>
+</svg>

@@ -1,0 +1,15 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#1e40af"/>
+  <text x="640" y="300" font-family="Arial, sans-serif" font-size="80" fill="white" text-anchor="middle" font-weight="bold">
+    Spatial Presenter
+  </text>
+  <text x="640" y="400" font-family="Arial, sans-serif" font-size="48" fill="#93c5fd" text-anchor="middle">
+    Hands-Free Presentations
+  </text>
+  <text x="640" y="500" font-family="Arial, sans-serif" font-size="32" fill="#dbeafe" text-anchor="middle">
+    Use gestures and voice to navigate
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 1
+  </text>
+</svg>

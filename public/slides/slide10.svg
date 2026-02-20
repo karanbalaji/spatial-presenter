@@ -1,0 +1,28 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#grad1)"/>
+  <text x="640" y="200" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle" font-weight="bold">
+    The Future is Now
+  </text>
+  <text x="640" y="300" font-family="Arial, sans-serif" font-size="42" fill="#fef3c7" text-anchor="middle">
+    You just experienced it
+  </text>
+  <text x="640" y="400" font-family="Arial, sans-serif" font-size="38" fill="#fde68a" text-anchor="middle">
+    ✋ No keyboard needed
+  </text>
+  <text x="640" y="460" font-family="Arial, sans-serif" font-size="38" fill="#fde68a" text-anchor="middle">
+    🎤 Just your voice and hands
+  </text>
+  <text x="640" y="560" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-style="italic">
+    Welcome to 2030 ✨
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 10
+  </text>
+</svg>

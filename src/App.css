@@ -15,42 +15,224 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
+/* ── Layout ─────────────────────────────────── */
+.app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Slide area ──────────────────────────────── */
+.slide-area {
+  flex: 1;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 0;
+}
+
+.slide-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ── Overlays ────────────────────────────────── */
+.gesture-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.72);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.slide-counter {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.72);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  padding: 20px;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.sidebar-title h2 {
+  font-size: 20px;
+  margin: 0 0 6px 0;
+}
+
+.sidebar-title p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.webcam-preview {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  background: #000;
+  display: block;
+}
+
+.info-card {
+  background: white;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.info-card h3 {
+  font-size: 15px;
+  margin: 0 0 8px 0;
+}
+
+.gesture-value {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.gesture-value.active  { color: #059669; }
+.gesture-value.inactive { color: #999; }
+
+.guide-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Mobile layout (≤ 640px) ─────────────────── */
+@media (max-width: 640px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .slide-area {
+    flex: 1;
+  }
+
+  .gesture-overlay {
+    font-size: 12px;
+    padding: 7px 12px;
+    top: 10px;
+    left: 10px;
+    border-radius: 8px;
+  }
+
+  .slide-counter {
+    font-size: 12px;
+    padding: 5px 10px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  /* Bottom strip on mobile */
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-shrink: 0;
+    height: auto;
+    border-top: 2px solid #e5e7eb;
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .webcam-preview {
+    width: 90px;
+    height: 68px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .info-card {
+    padding: 10px 12px;
+    flex-shrink: 0;
+    min-width: 130px;
+  }
+
+  .info-card h3 {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .gesture-value {
+    font-size: 13px;
+  }
+
+  .guide-rows {
+    gap: 4px;
+    font-size: 12px;
+  }
+}
+
+/* ── Tablet layout (641px – 900px) ───────────── */
+@media (min-width: 641px) and (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .sidebar-title h2 {
+    font-size: 16px;
+  }
+
+  .info-card h3 {
+    font-size: 14px;
+  }
+
+  .gesture-value {
+    font-size: 15px;
+  }
+}
+
+/* ── Animations ──────────────────────────────── */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.1); }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-img {
-  transition: opacity 0.3s ease-in-out;
-  animation: fadeIn 0.4s ease-in-out;
+.slide-img {
+  animation: fadeIn 0.35s ease-in-out;
 }

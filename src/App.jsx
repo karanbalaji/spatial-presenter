@@ -1,31 +1,24 @@
 import './App.css';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useGestures } from './useGestures';
-
-const slides = [
-  './slides/slide1.svg',
-  './slides/slide2.svg',
-  './slides/slide3.svg',
-  './slides/slide4.svg',
-  './slides/slide5.svg',
-  './slides/slide6.svg',
-  './slides/slide7.svg',
-  './slides/slide8.svg',
-  './slides/slide9.svg',
-  './slides/slide10.svg'
-];
+import { useSlideStorage } from './hooks/useSlideStorage';
+import { SlideManager } from './components/SlideManager';
 
 function App() {
+  const { slides, isLoading, addSlides, removeSlide, clearAllSlides } = useSlideStorage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showManager, setShowManager] = useState(false);
   const videoRef = useRef(null);
   const gesture = useGestures(videoRef);
-  const [lastGestureTime, setLastGestureTime] = useState(0);
+  const lastActionTimeRef = useRef(0);
+  const pendingNavigationRef = useRef(null);
 
-  // Setup webcam
   useEffect(() => {
+    let stream = null;
+    
     async function setupCamera() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        stream = await navigator.mediaDevices.getUserMedia({
           video: {
             width: 640,
             height: 480
@@ -33,79 +26,136 @@ function App() {
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          console.log("📹 Webcam initialized");
+          console.log("Webcam initialized");
         }
       } catch (error) {
-        console.error("❌ Failed to access webcam:", error);
-        alert("Please allow camera access to use gesture controls!");
+        console.error("Failed to access webcam:", error);
       }
     }
 
     setupCamera();
 
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
       }
     };
   }, []);
 
-  // Handle gestures with debouncing
-  useEffect(() => {
-    if (!gesture) return;
-
+  const navigate = useCallback((direction, slideCount) => {
     const now = Date.now();
-    const debounceTime = 1000; // 1 second between gesture actions
+    if (now - lastActionTimeRef.current < 300) return;
+    lastActionTimeRef.current = now;
+    
+    if (direction === 'next') {
+      setCurrentSlide(prev => prev < slideCount - 1 ? prev + 1 : prev);
+    } else {
+      setCurrentSlide(prev => prev > 0 ? prev - 1 : prev);
+    }
+  }, []);
 
-    if (now - lastGestureTime < debounceTime) return;
+  useEffect(() => {
+    if (!gesture || slides.length === 0) return;
 
     if (gesture === 'Open_Palm') {
-      const nextSlide = Math.min(currentSlide + 1, slides.length - 1);
-      if (nextSlide !== currentSlide) {
-        setCurrentSlide(nextSlide);
-        setLastGestureTime(now);
-        console.log(`➡️  Next slide: ${nextSlide + 1}`);
-      }
+      pendingNavigationRef.current = () => navigate('next', slides.length);
     } else if (gesture === 'Victory') {
-      const prevSlide = Math.max(currentSlide - 1, 0);
-      if (prevSlide !== currentSlide) {
-        setCurrentSlide(prevSlide);
-        setLastGestureTime(now);
-        console.log(`⬅️  Previous slide: ${prevSlide + 1}`);
+      pendingNavigationRef.current = () => navigate('prev', slides.length);
+    }
+
+    const timeoutId = setTimeout(() => {
+      if (pendingNavigationRef.current) {
+        pendingNavigationRef.current();
+        pendingNavigationRef.current = null;
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [gesture, navigate, slides.length]);
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (slides.length === 0) return;
+      
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        navigate('next', slides.length);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigate('prev', slides.length);
       }
     }
-  }, [gesture, currentSlide, lastGestureTime]);
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [slides.length, navigate]);
+
+  const safeCurrentSlide = slides.length > 0 ? Math.min(currentSlide, slides.length - 1) : 0;
+
+  if (isLoading) {
+    return (
+      <div className="app-container loading">
+        <div className="loading-spinner"></div>
+        <p>Loading slides...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
-      {/* Main slide area */}
       <div className="slide-area">
-        <img
-          className="slide-img"
-          src={slides[currentSlide]}
-          alt={`Slide ${currentSlide + 1}`}
-        />
-
-        {/* Gesture indicator overlay */}
-        <div className="gesture-overlay">
-          <span>👋</span>
-          <span>{gesture || 'Show hand gesture'}</span>
-        </div>
-
-        {/* Slide counter */}
-        <div className="slide-counter">
-          {currentSlide + 1} / {slides.length}
-        </div>
+        {slides.length === 0 ? (
+          <div className="no-slides-display">
+            <div className="no-slides-content">
+              <h2>No Slides</h2>
+              <p>Upload slides to start presenting</p>
+              <button 
+                className="upload-slides-btn"
+                onClick={() => setShowManager(true)}
+              >
+                Upload Slides
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <img
+              className="slide-img"
+              src={slides[safeCurrentSlide].dataUrl}
+              alt={`Slide ${safeCurrentSlide + 1}`}
+            />
+            <div className="gesture-overlay">
+              <span>{gesture || 'Show hand gesture'}</span>
+            </div>
+            <div className="slide-counter">
+              {safeCurrentSlide + 1} / {slides.length}
+            </div>
+            <button 
+              className="nav-arrow nav-prev" 
+              onClick={() => navigate('prev', slides.length)}
+              disabled={safeCurrentSlide === 0}
+              aria-label="Previous slide"
+            >
+              ‹
+            </button>
+            <button 
+              className="nav-arrow nav-next" 
+              onClick={() => navigate('next', slides.length)}
+              disabled={safeCurrentSlide === slides.length - 1}
+              aria-label="Next slide"
+            >
+              ›
+            </button>
+          </>
+        )}
       </div>
 
-      {/* Sidebar / bottom strip */}
       <div className="sidebar">
         <div className="sidebar-title">
-          <h2>🎯 Spatial Presenter</h2>
+          <h2>Spatial Presenter</h2>
           <p>Control slides with hand gestures</p>
         </div>
 
-        {/* Webcam preview */}
         <video
           ref={videoRef}
           autoPlay
@@ -114,7 +164,6 @@ function App() {
           className="webcam-preview"
         />
 
-        {/* Current gesture */}
         <div className="info-card">
           <h3>Current Gesture</h3>
           <p className={`gesture-value ${gesture ? 'active' : 'inactive'}`}>
@@ -122,15 +171,39 @@ function App() {
           </p>
         </div>
 
-        {/* Controls guide */}
         <div className="info-card">
-          <h3>🤚 Gestures</h3>
+          <h3>Gestures</h3>
           <div className="guide-rows">
-            <div>✋ <strong>Open Palm</strong> → Next</div>
-            <div>✌️ <strong>Victory/Peace</strong> → Back</div>
+            <div>Open Palm - Next</div>
+            <div>Victory/Peace - Back</div>
           </div>
         </div>
+
+        <div className="info-card">
+          <h3>Keyboard</h3>
+          <div className="guide-rows">
+            <div>Arrow Right/Space - Next</div>
+            <div>Arrow Left - Previous</div>
+          </div>
+        </div>
+
+        <button 
+          className="manage-slides-btn"
+          onClick={() => setShowManager(true)}
+        >
+          Manage Slides
+        </button>
       </div>
+
+      {showManager && (
+        <SlideManager
+          slides={slides}
+          onAddSlides={addSlides}
+          onRemoveSlide={removeSlide}
+          onClearAll={clearAllSlides}
+          onClose={() => setShowManager(false)}
+        />
+      )}
     </div>
   );
 }

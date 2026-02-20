@@ -1,0 +1,21 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#dc2626"/>
+  <text x="640" y="200" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle" font-weight="bold">
+    The Year: 2030
+  </text>
+  <text x="640" y="320" font-family="Arial, sans-serif" font-size="42" fill="#fecaca" text-anchor="middle">
+    Keyboards have been banned worldwide
+  </text>
+  <text x="640" y="400" font-family="Arial, sans-serif" font-size="36" fill="#fee2e2" text-anchor="middle">
+    After the Great Carpal Tunnel Crisis of 2028
+  </text>
+  <text x="640" y="520" font-family="Arial, sans-serif" font-size="32" fill="#fca5a5" text-anchor="middle" font-style="italic">
+    "Our hands were meant for gestures,
+  </text>
+  <text x="640" y="570" font-family="Arial, sans-serif" font-size="32" fill="#fca5a5" text-anchor="middle" font-style="italic">
+    not repetitive clicking!"
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 4
+  </text>
+</svg>

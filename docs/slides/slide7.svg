@@ -1,0 +1,24 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#ea580c"/>
+  <text x="640" y="180" font-family="Arial, sans-serif" font-size="64" fill="white" text-anchor="middle" font-weight="bold">
+    🎨 Creative Revolution
+  </text>
+  <text x="640" y="280" font-family="Arial, sans-serif" font-size="38" fill="#fed7aa" text-anchor="middle">
+    Artists paint in the air with hand tracking
+  </text>
+  <text x="640" y="350" font-family="Arial, sans-serif" font-size="38" fill="#fed7aa" text-anchor="middle">
+    Musicians conduct virtual orchestras
+  </text>
+  <text x="640" y="420" font-family="Arial, sans-serif" font-size="38" fill="#fed7aa" text-anchor="middle">
+    Designers sculpt 3D models with gestures
+  </text>
+  <text x="640" y="520" font-family="Arial, sans-serif" font-size="32" fill="#ffedd5" text-anchor="middle" font-style="italic">
+    "Why would we limit ourselves
+  </text>
+  <text x="640" y="570" font-family="Arial, sans-serif" font-size="32" fill="#ffedd5" text-anchor="middle" font-style="italic">
+    to 104 keys?"
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 7
+  </text>
+</svg>

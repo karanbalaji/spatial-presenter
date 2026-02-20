@@ -1,0 +1,24 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#0891b2"/>
+  <text x="640" y="180" font-family="Arial, sans-serif" font-size="64" fill="white" text-anchor="middle" font-weight="bold">
+    🎓 At School
+  </text>
+  <text x="640" y="280" font-family="Arial, sans-serif" font-size="38" fill="#cffafe" text-anchor="middle">
+    Kids learn to gesture before they learn to write
+  </text>
+  <text x="640" y="360" font-family="Arial, sans-serif" font-size="38" fill="#cffafe" text-anchor="middle">
+    "Pinch to zoom" is taught in kindergarten
+  </text>
+  <text x="640" y="440" font-family="Arial, sans-serif" font-size="38" fill="#cffafe" text-anchor="middle">
+    Voice commands replace typing tests
+  </text>
+  <text x="640" y="550" font-family="Arial, sans-serif" font-size="32" fill="#a5f3fc" text-anchor="middle" font-style="italic">
+    The last typewriter sits in a museum,
+  </text>
+  <text x="640" y="600" font-family="Arial, sans-serif" font-size="32" fill="#a5f3fc" text-anchor="middle" font-style="italic">
+    next to the rotary phone
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 6
+  </text>
+</svg>

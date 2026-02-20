@@ -1,0 +1,24 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#db2777"/>
+  <text x="640" y="180" font-family="Arial, sans-serif" font-size="64" fill="white" text-anchor="middle" font-weight="bold">
+    👴 The Last Keyboard User
+  </text>
+  <text x="640" y="280" font-family="Arial, sans-serif" font-size="38" fill="#fce7f3" text-anchor="middle">
+    Old Tom still uses his mechanical keyboard
+  </text>
+  <text x="640" y="350" font-family="Arial, sans-serif" font-size="38" fill="#fce7f3" text-anchor="middle">
+    "The clicking sounds help me think!"
+  </text>
+  <text x="640" y="450" font-family="Arial, sans-serif" font-size="32" fill="#fbcfe8" text-anchor="middle" font-style="italic">
+    Kids gather around in amazement
+  </text>
+  <text x="640" y="510" font-family="Arial, sans-serif" font-size="32" fill="#fbcfe8" text-anchor="middle" font-style="italic">
+    "Is that how grandma used to work?"
+  </text>
+  <text x="640" y="600" font-family="Arial, sans-serif" font-size="28" fill="#f9a8d4" text-anchor="middle">
+    (He's become a tourist attraction)
+  </text>
+  <text x="1200" y="680" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="end">
+    Slide 9
+  </text>
+</svg>
